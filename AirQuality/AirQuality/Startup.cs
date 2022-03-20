@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using VueCliMiddleware;
 
 namespace AirQuality
 {
@@ -36,6 +37,11 @@ namespace AirQuality
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore).AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver()); ;
 
             services.AddControllers();
+
+            services.AddSpaStaticFiles(Configuration =>
+            {
+                Configuration.RootPath = "AirQualityUI/dist";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +57,8 @@ namespace AirQuality
 
             app.UseRouting();
 
+            app.UseSpaStaticFiles();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -63,6 +71,21 @@ namespace AirQuality
                 FileProvider = new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "Photos")),
                 RequestPath = "/Photos"
+            });
+
+            app.UseSpa(spa =>
+            {
+                if (env.IsDevelopment())
+                {
+                    spa.Options.SourcePath = "AirQualityUI/dist";
+                }
+                else
+                {
+                    spa.Options.SourcePath = "dist";
+                }
+
+                
+
             });
         }
     }

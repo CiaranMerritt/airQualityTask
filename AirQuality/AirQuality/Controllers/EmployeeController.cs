@@ -33,7 +33,7 @@ namespace AirQuality.Controllers
                             dbo.Employee
                             ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
+            string sqlDataSource = _configuration.GetConnectionString("LearningDBCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -59,7 +59,7 @@ namespace AirQuality.Controllers
                             values (@EmployeeName, @EmployeeDepartment,@DateOfJoining,@PhotoFileName)
                             ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
+            string sqlDataSource = _configuration.GetConnectionString("LearningDBCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -92,7 +92,7 @@ namespace AirQuality.Controllers
                                     where EmployeeId = @EmployeeId
                             ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
+            string sqlDataSource = _configuration.GetConnectionString("LearningDBCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -122,7 +122,7 @@ namespace AirQuality.Controllers
                                 where EmployeeId = @EmployeeId
                             ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
+            string sqlDataSource = _configuration.GetConnectionString("LearningDBCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {

@@ -13,11 +13,10 @@ namespace AirQuality.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DepartmentController : ControllerBase
+    public class SavedCityController : ControllerBase
     {
-
         private readonly IConfiguration _configuration;
-        public DepartmentController(IConfiguration configuration)
+        public SavedCityController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -26,8 +25,8 @@ namespace AirQuality.Controllers
         public JsonResult Get()
         {
             string query = @"
-                            select DepartmentId, DepartmentName from
-                            dbo.Department
+                            select CityId, CityName, CountryName, LastUpdated, Parameters from
+                            dbo.SavedCities
                             ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("LearningDBCon");
@@ -48,11 +47,12 @@ namespace AirQuality.Controllers
         }
 
         [HttpPost]
-        public JsonResult Post(Department dep)
+        public JsonResult Post(SavedCity city)
         {
             string query = @"
-                            insert into dbo.Department
-                            values (@DepartmentName)
+                            insert into dbo.SavedCities
+                            (CityName, CountryName,LastUpdated,Parameters)
+                            values (@CityName,@CountryName,@LastUpdated,@Parameters)
                             ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("LearningDBCon");
@@ -62,7 +62,10 @@ namespace AirQuality.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@DepartmentName", dep.DepartmentName);
+                    myCommand.Parameters.AddWithValue("@CityName", city.CityName);
+                    myCommand.Parameters.AddWithValue("@CountryName", city.CountryName);
+                    myCommand.Parameters.AddWithValue("@LastUpdated", city.LastUpdated);
+                    myCommand.Parameters.AddWithValue("@Parameters", city.Parameters);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -74,12 +77,15 @@ namespace AirQuality.Controllers
         }
 
         [HttpPut]
-        public JsonResult Put(Department dep)
+        public JsonResult Put(SavedCity city)
         {
             string query = @"
-                            update dbo.Department
-                            set DepartmentName =  @DepartmentName
-                                where DepartmentId = @DepartmentId
+                            update dbo.Employee
+                            set CityName =  @CityName, 
+                                CountryName = @CountryName, 
+                                LastUpdated = LastUpdated, 
+                                Parameters = @Parameters
+                                    where CityId = @CityId
                             ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("LearningDBCon");
@@ -89,8 +95,11 @@ namespace AirQuality.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@DepartmentId", dep.DepartmentId);
-                    myCommand.Parameters.AddWithValue("@DepartmentName", dep.DepartmentName);
+                    myCommand.Parameters.AddWithValue("@CityId", city.CityId);
+                    myCommand.Parameters.AddWithValue("@CityName", city.CityName);
+                    myCommand.Parameters.AddWithValue("@CountryName", city.CountryName);
+                    myCommand.Parameters.AddWithValue("@LastUpdated", city.LastUpdated);
+                    myCommand.Parameters.AddWithValue("@Parameters", city.Parameters);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -105,8 +114,8 @@ namespace AirQuality.Controllers
         public JsonResult Delete(int id)
         {
             string query = @"
-                            delete from dbo.Department
-                                where DepartmentId = @DepartmentId
+                            delete from dbo.SavedCities
+                                where CityId = @CityId
                             ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("LearningDBCon");
@@ -116,7 +125,7 @@ namespace AirQuality.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@DepartmentId", id);
+                    myCommand.Parameters.AddWithValue("@CityId", id);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();

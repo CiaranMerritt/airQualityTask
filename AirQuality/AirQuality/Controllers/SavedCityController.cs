@@ -21,6 +21,7 @@ namespace AirQuality.Controllers
             _configuration = configuration;
         }
 
+        //Get all cities city API endpoint. 
         [HttpGet]
         public JsonResult Get()
         {
@@ -46,6 +47,7 @@ namespace AirQuality.Controllers
             return new JsonResult(table);
         }
 
+        //Save a new city API endpoint. 
         [HttpPost]
         public JsonResult Post(SavedCity city)
         {
@@ -76,6 +78,9 @@ namespace AirQuality.Controllers
             return new JsonResult("Success Added to table");
         }
 
+        //Updatge a city API endpoint. 
+        //Not currently in use as you don't need to edit the cities once you get them from the OpenAQ endpoint
+        //Might be used if I want to implement an update city data function that calls to OpenAQ for more recent data
         [HttpPut]
         public JsonResult Put(SavedCity city)
         {
@@ -110,6 +115,7 @@ namespace AirQuality.Controllers
             return new JsonResult("Success Updated item");
         }
 
+        //Delete a city API endpoint. 
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {

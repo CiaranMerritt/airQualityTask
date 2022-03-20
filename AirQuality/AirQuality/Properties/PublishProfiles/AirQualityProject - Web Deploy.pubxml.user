@@ -7,7 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAtnC7qrNyzUO2r9HgGHjbsQAAAAACAAAAAAAQZgAAAAEAACAAAABw6WnpBDVAdnKR5VhTIJTGYf2sQXb1xL5vLsvw0W1tCwAAAAAOgAAAAAIAACAAAABvKj4EL/G9q9gnLzuWiJEP19RsLLrrfm4Us5ltEzbrC4AAAAC6HNGnYKMP9/EwHQcXYk2xwCdg+kStgZqOBA2dX6Iv+R5Q74+xixZKdgfHdwbFFTEFDszhKGDSG2ZV8le6rwm5g5ehCbj1p5gnN2wg6ublp/Zqs1cicvMb0AVEJyk1FOEtodKyxm/KwJyfyPFdb7aupbtcdwlFwEFyu7A4GjAA2kAAAABFDK68Im6ZnA88BUmBO+crkvWrFGRDejwTKzmmqiSne9Nh+9bTOr5S7AWWNat+eRw5gdjEgEaKW9qlreayOfy2</EncryptedPassword>
-    <History>True|2022-03-20T11:49:15.4613546Z;True|2022-03-20T02:07:32.5519893+00:00;True|2022-03-20T02:00:59.8015304+00:00;</History>
+    <History>True|2022-03-20T21:56:22.2254545Z;True|2022-03-20T11:49:15.4613546+00:00;True|2022-03-20T02:07:32.5519893+00:00;True|2022-03-20T02:00:59.8015304+00:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="EmployeeAppCon">
